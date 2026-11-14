@@ -81,7 +81,14 @@ export function DesktopNav({ items }: { items: CategoryWithCalculators[] }) {
               >
                 <span className="inline-flex items-center gap-1.5">
                   {category.title}
-                  <svg aria-hidden="true" viewBox="0 0 16 16" className={`h-3.5 w-3.5 transition-transform ${isOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 16 16"
+                    className={`h-3.5 w-3.5 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  >
                     <path d="m4 6 4 4 4-4" />
                   </svg>
                 </span>
@@ -160,7 +167,7 @@ export function MobileNav({ items }: { items: CategoryWithCalculators[] }) {
         aria-haspopup="true"
         aria-label={menuOpen ? "Закрыть меню разделов" : "Открыть меню разделов"}
         onClick={toggleMenu}
-          className="flex h-10 w-10 items-center justify-center rounded-xl border border-border/70 bg-card/60 text-muted shadow-sm transition-colors hover:bg-accent-soft hover:text-accent-soft-foreground"
+        className="flex h-10 w-10 items-center justify-center rounded-xl border border-border/70 bg-card/60 text-muted shadow-sm transition-colors hover:bg-accent-soft hover:text-accent-soft-foreground"
       >
         {menuOpen ? (
           <svg
