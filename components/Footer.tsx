@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CATEGORIES, getCalculatorsByCategory } from "@/lib/calculators/registry";
 import { siteConfig } from "@/lib/site-config";
+import { APP_VERSION } from "@/lib/app-version";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -33,6 +34,7 @@ export function Footer() {
           <p>
             © {year} {siteConfig.name}. Все расчёты носят справочный характер.
           </p>
+          <span className="text-xs text-muted/70">Версия {APP_VERSION}</span>
           <nav aria-label="Информация о проекте" className="flex gap-4">
             <Link href="/moi-raschety" className="hover:text-accent">
               Мои расчёты

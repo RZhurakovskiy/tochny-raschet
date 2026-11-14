@@ -10,6 +10,7 @@ import { YandexAdsLoader } from "@/components/YandexAdsLoader";
 import { RouteProgressBar } from "@/components/RouteProgressBar";
 import { BugReportButton } from "@/components/BugReportButton";
 import { VkMiniAppProvider } from "@/components/VkMiniAppProvider";
+import { AppTour } from "@/components/AppTour";
 
 /**
  * Применяет сохранённую тему до первой отрисовки, чтобы избежать мигания. По умолчанию —
@@ -63,6 +64,7 @@ export default function RootLayout({
           {THEME_INIT_SCRIPT}
         </Script>
         <VkMiniAppProvider />
+        <AppTour />
         <RouteProgressBar />
         <Header />
         <main className="flex-1">{children}</main>
