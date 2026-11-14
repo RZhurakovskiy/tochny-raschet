@@ -59,7 +59,11 @@ export function DesktopNav({ items }: { items: CategoryWithCalculators[] }) {
 
   return (
     <div className="hidden min-w-0 sm:block">
-      <nav ref={navRef} aria-label="Разделы калькуляторов" className="flex flex-wrap gap-2 text-sm">
+      <nav
+        ref={navRef}
+        aria-label="Разделы калькуляторов"
+        className="flex flex-wrap gap-1 rounded-2xl border border-border/70 bg-card/60 p-1 text-sm shadow-sm"
+      >
         {items.map(({ category, calculators }) => {
           const isOpen = openSlug === category.slug;
           return (
@@ -69,20 +73,25 @@ export function DesktopNav({ items }: { items: CategoryWithCalculators[] }) {
                 aria-expanded={isOpen}
                 aria-haspopup="true"
                 onClick={(event) => toggleCategory(category.slug, event)}
-                className={`cursor-pointer whitespace-nowrap rounded-md px-3 py-2 transition-colors ${
+                className={`cursor-pointer whitespace-nowrap rounded-xl px-3 py-2 transition-all ${
                   isOpen
-                    ? "bg-accent-soft text-accent-soft-foreground"
-                    : "hover:bg-accent-soft hover:text-accent-soft-foreground"
+                    ? "bg-accent text-accent-foreground shadow-sm"
+                    : "text-muted hover:bg-accent-soft hover:text-accent-soft-foreground"
                 }`}
               >
-                {category.title}
+                <span className="inline-flex items-center gap-1.5">
+                  {category.title}
+                  <svg aria-hidden="true" viewBox="0 0 16 16" className={`h-3.5 w-3.5 transition-transform ${isOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="m4 6 4 4 4-4" />
+                  </svg>
+                </span>
               </button>
               {isOpen && dropdownPos && (
                 <ul
                   // fixed с координатами от getBoundingClientRect() - не зависит от того, на какой
                   // из перенесённых строк ряда категорий стоит кнопка, и не клиппится overflow
                   // родителя.
-                  className="fixed z-20 min-w-56 rounded-lg border border-border bg-card py-2 shadow-lg"
+                  className="fixed z-20 min-w-60 rounded-2xl border border-border bg-card/95 p-2 shadow-xl backdrop-blur"
                   style={{ top: dropdownPos.top, left: dropdownPos.left }}
                 >
                   {calculators.map((calculator) => (
@@ -90,7 +99,7 @@ export function DesktopNav({ items }: { items: CategoryWithCalculators[] }) {
                       <Link
                         href={`/${calculator.slug}`}
                         onClick={() => setOpenSlug(null)}
-                        className="block px-4 py-2 hover:bg-accent-soft hover:text-accent-soft-foreground"
+                        className="block rounded-xl px-3 py-2.5 text-muted transition-colors hover:bg-accent-soft hover:text-accent-soft-foreground"
                       >
                         {calculator.shortTitle}
                       </Link>
@@ -151,7 +160,7 @@ export function MobileNav({ items }: { items: CategoryWithCalculators[] }) {
         aria-haspopup="true"
         aria-label={menuOpen ? "Закрыть меню разделов" : "Открыть меню разделов"}
         onClick={toggleMenu}
-        className="flex h-10 w-10 items-center justify-center rounded-md text-muted hover:bg-accent-soft hover:text-accent-soft-foreground"
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-border/70 bg-card/60 text-muted shadow-sm transition-colors hover:bg-accent-soft hover:text-accent-soft-foreground"
       >
         {menuOpen ? (
           <svg
@@ -188,7 +197,7 @@ export function MobileNav({ items }: { items: CategoryWithCalculators[] }) {
         // бы от узкой кнопки и уезжал за левый край экрана (найдено живым тестом в браузере).
         // fixed + right, посчитанный от вьюпорта, не зависит от того, где кнопка стоит в ряду.
         <div
-          className="fixed right-4 z-20 mt-2 w-72 max-w-[calc(100vw-2rem)] overflow-hidden rounded-lg border border-border bg-card py-1 shadow-lg"
+          className="fixed right-4 z-20 mt-2 w-80 max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border border-border bg-card/95 py-2 shadow-xl backdrop-blur"
           style={{ top: menuTop }}
         >
           {items.map(({ category, calculators }) => {
@@ -199,7 +208,7 @@ export function MobileNav({ items }: { items: CategoryWithCalculators[] }) {
                   type="button"
                   aria-expanded={isOpen}
                   onClick={() => setOpenSlug(isOpen ? null : category.slug)}
-                  className="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm hover:bg-accent-soft hover:text-accent-soft-foreground"
+                  className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-sm transition-colors ${isOpen ? "bg-accent-soft text-accent-soft-foreground" : "hover:bg-accent-soft hover:text-accent-soft-foreground"}`}
                 >
                   {category.title}
                   <span aria-hidden="true" className="text-muted">
@@ -213,7 +222,7 @@ export function MobileNav({ items }: { items: CategoryWithCalculators[] }) {
                         <Link
                           href={`/${calculator.slug}`}
                           onClick={() => setMenuOpen(false)}
-                          className="block px-8 py-2 text-sm text-muted hover:bg-accent-soft hover:text-accent-soft-foreground"
+                          className="mx-1 block rounded-lg px-4 py-2 text-sm text-muted transition-colors hover:bg-accent-soft hover:text-accent-soft-foreground"
                         >
                           {calculator.shortTitle}
                         </Link>
@@ -227,7 +236,7 @@ export function MobileNav({ items }: { items: CategoryWithCalculators[] }) {
           <Link
             href="/moi-raschety"
             onClick={() => setMenuOpen(false)}
-            className="block border-t border-border px-4 py-2.5 text-sm hover:bg-accent-soft hover:text-accent-soft-foreground"
+            className="mt-1 block border-t border-border px-4 py-3 text-sm font-medium hover:bg-accent-soft hover:text-accent-soft-foreground"
           >
             Мои расчёты
           </Link>
